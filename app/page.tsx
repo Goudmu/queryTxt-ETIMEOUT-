@@ -20,8 +20,8 @@ const Home: React.FC = () => {
   const fetchPosts = async () => {
     try {
       const res = await fetch("/api/posts");
-      const data = await res.json();
-      setPosts(data.data);
+      const { post } = await res.json();
+      setPosts(post);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
@@ -30,11 +30,8 @@ const Home: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/posts", {
+      const res = await fetch("/api/post", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({ title, content }),
       });
       const data = await res.json();
@@ -70,7 +67,6 @@ const Home: React.FC = () => {
         />
         <button type="submit">Add Post</button>
       </form>
-
       <div>
         {posts.map((post) => (
           <div key={post._id}>
