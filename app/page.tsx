@@ -19,7 +19,7 @@ const Home: React.FC = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch("/api/posts");
+      const res = await fetch("/api/post");
       const { post } = await res.json();
       setPosts(post);
     } catch (error) {
